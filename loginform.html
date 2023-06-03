@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EcoFeast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+        }
+
+        .full-page {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/bg.png);
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            padding-left: 50px;
+            padding-right: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+
+        nav ul {
+            display: inline-block;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 70px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: palevioletred;
+            font-size: 28px;
+        }
+        h3{
+            color: #ffff;
+        }
+
+        .login-page {
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+        }
+
+        .form-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-group-login {
+            width: 100%;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            outline: none;
+        }
+
+        .check-box {
+            margin: 10px 5px 10px 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: palevioletred;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: #e25985;
+        }
+
+        .login-heading {
+            font-size: 24px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password-link {
+            text-align: center;
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="full-page">
+        <div class="navbar">
+            <div>
+                <h3>Login Page</h3>
+            </div>
+        </div>
+        <div id="login-form" class="login-page">
+            <div style="display: flex; justify-content: center;">
+                <iframe title='Tons of food lost or wasted' src='https://www.theworldcounts.com/embeds/counters/101?background_color=transparent&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>
+              </div>              
+            <div class="form-box">
+                <h2 class="login-heading">Login Page</h2>
+                <form id="login" class="input-group-login" action="http://localhost:3000/api/signin" method="post">
+                    <input type="text" id="email" class="input-field" name="email" placeholder="Enter Email" required>
+                    <input type="password" id="password" class="input-field" name="password" placeholder="Enter Password" required>
+                    <input type="checkbox" class="check-box" name="remember"><span>Remember Password</span>
+                    <button type="submit" class="submit-btn">Log in</button>
+                  </form> 
+                  <script> fetch("/api/signin")
+                    .then(response => response.json())
+                    .then(data => {
+                      // Access the URL and update the HTML
+                      const url = data.url;
+                      document.getElementById("url").textContent = url;
+                    })
+                    .catch(error => {
+                      console.error("Error:", error);
+                    });
+                    </script>
+                  <div id="message"></div>
+                                   
+                <a href="#" class="forgot-password-link">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var modal = document.getElementById("login-form");
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+        window.onload = function() {
+            modal.style.display = "block";
+        };
+    </script>
+</body>
+</html>
